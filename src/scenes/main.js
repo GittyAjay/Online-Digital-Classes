@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import LottieView from "lottie-react-native";
+import SocialButton from '_molecules/social-button';
+import HelpText from '_molecules/help-text';
 
 import {
   View,
@@ -15,13 +16,10 @@ import {
   Platform,
 } from "react-native";
 
-import { Button } from "react-native-ui-lib"; //eslint-disable-line
 import Icon from "react-native-vector-icons/AntDesign";
 import * as Animatable from "react-native-animatable";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
-const facebookIcon = require("../assets/icons/facebook.png");
-const googleIcon = require("../assets/icons/google-plus.png");
 
 class MainScreen extends Component {
   static navigationOptions = {
@@ -136,21 +134,13 @@ class MainScreen extends Component {
     });
     const marginTop = this.loginHeight.interpolate({
       inputRange: [150, SCREEN_HEIGHT],
-      outputRange: [25, 60],
+      outputRange: [25, 100],
     });
     const headerBackArrowOpacity = this.loginHeight.interpolate({
       inputRange: [150, SCREEN_HEIGHT],
       outputRange: [0, 1],
     });
-    const titleTextLeft = this.loginHeight.interpolate({
-      inputRange: [150, SCREEN_HEIGHT],
-      outputRange: [100, 25],
-    });
-    const titleTextBottom = this.loginHeight.interpolate({
-      inputRange: [150, 400, SCREEN_HEIGHT],
-      outputRange: [0, 0, 100],
-    });
-    const titleTextOpacity = this.loginHeight.interpolate({
+    const helpTextOpacity = this.loginHeight.interpolate({
       inputRange: [150, SCREEN_HEIGHT],
       outputRange: [0, 1],
     });
@@ -161,7 +151,7 @@ class MainScreen extends Component {
           style={{
             position: "absolute",
             width: 60,
-            top: 48,
+            top: 25,
             left: 25,
             zIndex: 100,
             opacity: headerBackArrowOpacity, //animated
@@ -175,10 +165,10 @@ class MainScreen extends Component {
         <Animated.View
           style={{
             position: "absolute",
-            height: 48,
-            width: 48,
+            height: 40,
+            width: 40,
             right: 10,
-            bottom: this.keyboardHeight, // animated
+            top: 300, // animated
             opacity: this.forwardArrowOpacity, //animated
             zIndex: 100,
             backgroundColor: "#54575e",
@@ -187,34 +177,25 @@ class MainScreen extends Component {
             borderRadius: 30,
           }}
         >
-          <Icon name="arrowright" style={{ color: "white" }} size={32} />
+          <TouchableOpacity>
+            <Icon name="arrowright" style={{ color: "white" }} size={32} />
+          </TouchableOpacity>
         </Animated.View>
 
         <ImageBackground
           source={require("../assets/login_bg.jpg")}
           style={{ flex: 1 }}
         >
-          <View
+          <Animated.View
             style={{
               flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
+              marginBottom: 40,
+              zIndex: 1000,
+              opacity: helpTextOpacity,
             }}
           >
-            <Animatable.View
-              animation="zoomIn"
-              iterationCount={1}
-              style={{
-                backgroundColor: "white",
-                height: 100,
-                width: 100,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ fontWeight: "bold", fontSize: 26 }}>OSI</Text>
-            </Animatable.View>
-          </View>
+            <HelpText />
+          </Animated.View>
 
           {/** BOTTOM HALF **/}
           <Animatable.View animation="slideInUp" iterationCount={1}>
@@ -250,36 +231,7 @@ class MainScreen extends Component {
                     flexDirection: "row",
                   }}
                 >
-                  <Animated.View
-                    style={{
-                      width: 300,
-                      height: 200,
-                      alignItems: "center",
-                      flexDirection: "row",
-                      position: "absolute",
-                      opacity: titleTextOpacity,
-                    }}
-                  >
-                    
-                    <Animated.Text
-                      style={{
-                        fontSize: 18,
-                        color: "gray",
-                        bottom: titleTextBottom, //animated
-                        left: titleTextLeft, //animated
-                        opacity: titleTextOpacity, //animated
-                      }}
-                    >
-                      
-                      Enter your mobile number
-                    </Animated.Text>
-                   
-                  </Animated.View>
 
-                  <Image
-                    source={require("../assets/india.png")}
-                    style={{ height: 24, width: 24, resizeMode: "contain" }}
-                  />
                   <Animated.View
                     pointerEvents="none"
                     style={{
@@ -288,6 +240,10 @@ class MainScreen extends Component {
                       flex: 1,
                     }}
                   >
+                    <Image
+                      source={require("../assets/india.png")}
+                      style={{ height: 24, width: 24, resizeMode: "contain" }}
+                    />
                     <Text
                       style={{
                         fontSize: 16,
@@ -308,31 +264,7 @@ class MainScreen extends Component {
                 </Animated.View>
               </TouchableOpacity>
             </Animated.View>
-            <View style={styles.socialLogin}>
-              <Button
-                backgroundColor="#3b5998"
-                iconSource={facebookIcon}
-                iconStyle={{
-                  resizeMode: "contain",
-                  borderWidth: 5,
-                  height: 26,
-                  width: 26,
-                }}
-                label="Facebook"
-                borderRadius={4}
-                style={styles.facebookBtn}
-                onPress={() => {}}
-              />
-
-              <Button
-                backgroundColor="#db3236"
-                iconSource={googleIcon}
-                label="Google  "
-                borderRadius={4}
-                style={styles.googleBtn}
-                onPress={() => {}}
-              />
-            </View>
+            <SocialButton />
           </Animatable.View>
         </ImageBackground>
       </View>
@@ -340,27 +272,10 @@ class MainScreen extends Component {
   }
 }
 export default MainScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  googleBtn: {
-    flex: 1,
-    height: 45,
-    marginStart: 6,
-  },
-  facebookBtn: {
-    flex: 1,
-    height: 45,
-    marginEnd: 6,
-  },
-  socialLogin: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    padding: 20,
   },
 });
