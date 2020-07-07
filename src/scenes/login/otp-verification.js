@@ -35,7 +35,7 @@ export default function OtpVerification({ navigation }) {
         style={{
           position: "absolute",
           width: 60,
-          top: 20,
+          top: 50,
           left: 25,//animated
         }}
       >
