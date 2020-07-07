@@ -45,30 +45,41 @@ export default function SocialButton(){
 };
 async function onGoogleButtonPress() {
   try{
-    console.log('you are in onGoogle Button press');
-    const { idToken } = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken).catch((error) => {
-      console.log("Api call error");
-      alert(error.message);
-    });;
-    return auth().signInWithCredential(googleCredential);
-    console.log('Success');
+     // Get the users ID token
+  const { idToken } = await GoogleSignin.signIn();
+
+  // Create a Google credential with the token
+  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  // Sign-in the user with the credential
+  return auth().signInWithCredential(googleCredential);
   }catch(err){
     console.log(err);
   }
 }
 
 async function onFacebookButtonPress() {
+ try{
   const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
   if (result.isCancelled) {
     throw 'User cancelled the login process';
   }
+
+  // Once signed in, get the users AccesToken
   const data = await AccessToken.getCurrentAccessToken();
+
   if (!data) {
     throw 'Something went wrong obtaining access token';
   }
+
+  // Create a Firebase credential with the AccessToken
   const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+  // Sign-in the user with the credential
   return auth().signInWithCredential(facebookCredential);
+
+ }catch(e){console.log(e);}
 }
 
 const styles = StyleSheet.create({
