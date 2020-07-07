@@ -3,13 +3,13 @@ import { View, StyleSheet, Text } from 'react-native';
 import LottieView from "lottie-react-native";
 
 
-const HelpText = ({title, message, animation, animStyle}) => (
+const HelpText = () => (
     <View style={styles.container}>
         <View style={{ flex: 1, alignItems: 'center' }}>
-            <LottieView style={animStyle} source={animation} autoPlay false />
+            <LottieView style={{ width: 200, height: 200 }} source={require('../../assets/lottie/mobile.json')} autoPlay false />
         </View>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.message}>{message}</Text>
+        <Text style={styles.title}>Mobile Vericification</Text>
+        <Text style={styles.message}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
     </View>
 );
 
