@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     },
     container: {
         height: 260,
-        backgroundColor: "white",
         padding: 25,
     },
 });

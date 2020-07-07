@@ -1,6 +1,6 @@
 import {createStackNavigator} from 'react-navigation-stack';
 
-import LoginScreen from '_scenes/login';
+import OtpVerification from '_scenes/login/otp-verification';
 import MainScreen from '_scenes/main';
 
 const AuthNavigatorConfig = {
@@ -10,8 +10,8 @@ const AuthNavigatorConfig = {
 };
 
 const RouteConfigs = {
-  Login: LoginScreen,
   Main: MainScreen,
+  OTP: OtpVerification,
 };
 
 const AuthNavigator = createStackNavigator(RouteConfigs, AuthNavigatorConfig);

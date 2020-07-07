@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import SocialButton from '_molecules/social-button';
-import HelpText from '_molecules/help-text';
+import {HelpText, SocialButton} from '_components';
 
 import {
   View,
@@ -18,13 +17,10 @@ import {
 
 import Icon from "react-native-vector-icons/AntDesign";
 import * as Animatable from "react-native-animatable";
-
+import navigations from "_navigations";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 class MainScreen extends Component {
-  static navigationOptions = {
-    headerShown: false,
-  };
   constructor() {
     super();
 
@@ -127,6 +123,10 @@ class MainScreen extends Component {
       useNativeDriver: false,
     }).start();
   };
+
+  navigateOTP(){
+    navigation.navigate('OTP');
+  }
   render() {
     const headerTextOpacity = this.loginHeight.interpolate({
       inputRange: [150, SCREEN_HEIGHT],
@@ -152,7 +152,7 @@ class MainScreen extends Component {
             position: "absolute",
             width: 60,
             top: 25,
-            left: 25,
+            left: 20,
             zIndex: 100,
             opacity: headerBackArrowOpacity, //animated
           }}
@@ -168,7 +168,7 @@ class MainScreen extends Component {
             height: 40,
             width: 40,
             right: 10,
-            top: 300, // animated
+            top: 260, // animated
             opacity: this.forwardArrowOpacity, //animated
             zIndex: 100,
             backgroundColor: "#54575e",
@@ -177,7 +177,7 @@ class MainScreen extends Component {
             borderRadius: 30,
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{this.props.navigation.navigate('OTP')}}>
             <Icon name="arrowright" style={{ color: "white" }} size={32} />
           </TouchableOpacity>
         </Animated.View>
@@ -189,7 +189,6 @@ class MainScreen extends Component {
           <Animated.View
             style={{
               flex: 1,
-              marginBottom: 40,
               zIndex: 1000,
               opacity: helpTextOpacity,
             }}

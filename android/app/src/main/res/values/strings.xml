@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FireAuth</string>
+    <string name="facebook_app_id">613108172653051</string>
+    <string name="fb_login_protocol_scheme">fb613108172653051</string>
 </resources>
