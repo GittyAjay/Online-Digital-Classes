@@ -16,8 +16,8 @@ import { HelpText, SocialButton } from '_components';
 export default function OtpVerification({ navigation }) {
   const [isValid, setValid] = React.useState(true);
 
-  async function checkValid(val){
-    (val.length==6)
+  async function checkValid(val) {
+    (val.length == 6)
       ? setValid(false)
       : setValid(true);
   }
@@ -35,7 +35,7 @@ export default function OtpVerification({ navigation }) {
         style={{
           position: "absolute",
           width: 60,
-          top: 20,
+          top: 50,
           left: 25,//animated
         }}
       >
@@ -45,13 +45,13 @@ export default function OtpVerification({ navigation }) {
       </View>
 
       <View center>
-        <HelpText />
+        <HelpText title='Code Vericification' message='Lorem Ipsum is simply dummy text of the printing and typesetting industry.' animation={require('../../assets/lottie/otp-verified.json')} animStyle={{ width: 200, height: 100, paddingTop: 20}}/>
         <CodeField
           ref={ref}
           {...props}
           value={value}
           autoFocus
-          onChangeText={async (val)=>{
+          onChangeText={async (val) => {
             setValue(val);
             checkValid(val);
           }}
@@ -76,7 +76,7 @@ export default function OtpVerification({ navigation }) {
           style={{ height: 48, width: 200 }}
           enableShadow
           iconOnRight
-          onPress={()=>navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Home')}
         />
       </View>
     </SafeAreaView>

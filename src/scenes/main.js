@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {HelpText, SocialButton} from '_components';
+import { HelpText, SocialButton } from '_components';
 
 import {
   View,
@@ -8,6 +8,7 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  StatusBar,
   Image,
   Animated,
   Dimensions,
@@ -124,7 +125,7 @@ class MainScreen extends Component {
     }).start();
   };
 
-  navigateOTP(){
+  navigateOTP() {
     navigation.navigate('OTP');
   }
   render() {
@@ -147,11 +148,12 @@ class MainScreen extends Component {
 
     return (
       <View style={{ flex: 1 }}>
+        <StatusBar translucent barStyle='dark-content' backgroundColor="transparent"/>
         <Animated.View
           style={{
             position: "absolute",
             width: 60,
-            top: 25,
+            top: 50,
             left: 20,
             zIndex: 100,
             opacity: headerBackArrowOpacity, //animated
@@ -177,7 +179,7 @@ class MainScreen extends Component {
             borderRadius: 30,
           }}
         >
-          <TouchableOpacity onPress={()=>{this.props.navigation.navigate('OTP')}}>
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('OTP') }}>
             <Icon name="arrowright" style={{ color: "white" }} size={32} />
           </TouchableOpacity>
         </Animated.View>
@@ -193,7 +195,7 @@ class MainScreen extends Component {
               opacity: helpTextOpacity,
             }}
           >
-            <HelpText />
+            <HelpText title='Mobile Vericification' message='Lorem Ipsum is simply dummy text of the printing and typesetting industry.' animation={require('../assets/lottie/mobile.json')} animStyle={{ width: 240, height: 200}}/>
           </Animated.View>
 
           {/** BOTTOM HALF **/}
@@ -230,7 +232,6 @@ class MainScreen extends Component {
                     flexDirection: "row",
                   }}
                 >
-
                   <Animated.View
                     pointerEvents="none"
                     style={{
